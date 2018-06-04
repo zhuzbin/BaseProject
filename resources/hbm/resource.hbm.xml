@@ -1,0 +1,17 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zhuzb.entity.Resource" table="sys_resource">
+        <id name="id" column="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="name" column="name"></property>
+        <property name="type" column="type"></property>
+        <property name="url" column="url"></property>
+        <property name="parentId" column="parent_id"></property>
+        <property name="parentIds" column="parent_ids"></property>
+        <property name="permission" column="permission"></property>
+        <property name="available" column="available"></property>
+    </class>
+</hibernate-mapping>

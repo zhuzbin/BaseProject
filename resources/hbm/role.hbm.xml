@@ -1,0 +1,14 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zhuzb.entity.Role" table="sys_role">
+        <id name="id" column="id" type="java.lang.Long">
+            <generator class="native"></generator>
+        </id>
+        <property name="role" column="role"></property>
+        <property name="description" column="description"></property>
+        <property name="resourceIds" column="resource_ids"></property>
+        <property name="available" column="available"></property>
+    </class>
+</hibernate-mapping>

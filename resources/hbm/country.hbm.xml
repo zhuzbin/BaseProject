@@ -1,0 +1,12 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zhuzb.entity.Country" table="country">
+        <id name="id" column="id">
+            <generator class="identity" />
+        </id>
+        <property name="countryName" column="country_name" />
+        <property name="countryCode" column="country_code" />
+    </class>
+</hibernate-mapping>
