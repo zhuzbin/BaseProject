@@ -225,18 +225,6 @@
         });
     }
 
-    //翻译组织名称
-    function oranList(value, row, index){
-        var str = ${zhangfn:organizationAll()};
-        var retStr = "";
-        $(str).each(function(index,obj){
-            if(obj.id == value){
-                retStr = obj.name;
-            }
-        });
-        return retStr;
-    }
-
     //翻译角色名称
     function roleList(value, row, index){
         var str = ${zhangfn:roleAll()};
