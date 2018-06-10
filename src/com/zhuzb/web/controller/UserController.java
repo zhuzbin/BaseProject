@@ -121,9 +121,9 @@ public class UserController {
     @ResponseBody
     public Map<String,Object>getUserList(HttpServletRequest request,User user) {
         Map<String, Object> map = new HashMap<String, Object>();
-        List<User> a = userService.getUserList(user);
+        List<User> list = userService.getUserList(user);
         map.put("total", userService.findAll().size());
-        map.put("rows", a);
+        map.put("rows", list);
         return map;
     }
 

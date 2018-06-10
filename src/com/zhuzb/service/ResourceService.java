@@ -1,5 +1,6 @@
 package com.zhuzb.service;
 
+import com.zhuzb.common.TreeViewEntity;
 import com.zhuzb.entity.Resource;
 
 import java.util.List;
@@ -33,4 +34,10 @@ public interface ResourceService {
      * @return
      */
     List<Resource> findMenus(Set<String> permissions);
+    
+    /**
+     * 获取资源的所有列表
+     * @return
+     */
+    List<TreeViewEntity> getTreeViewList();
 }

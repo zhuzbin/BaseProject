@@ -47,6 +47,12 @@
         <function-class>com.zhuzb.web.taglib.Functions</function-class>
         <function-signature>java.lang.String resourceNames(java.lang.String)</function-signature>
     </function>
+    <function>
+        <description>获取所有的资源列表</description>
+        <name>resourcesAll</name>
+        <function-class>com.zhuzb.web.taglib.Functions</function-class>
+        <function-signature>net.sf.json.JSONArray resourcesAll()</function-signature>
+    </function>
 
 
 </taglib>

@@ -17,4 +17,18 @@ public interface RoleDao {
 
     public Role findOne(Long roleId);
     public List<Role> findAll();
+    
+    /**
+     * 获取角色列表
+     * @param role
+     * @return
+     */
+    public List<Role> getRoleList(Role role);
+    
+    /**
+     * 查询角色名称是否存在
+     * @param roleName
+     * @return
+     */
+    public Role findByRoleName(String roleName);
 }

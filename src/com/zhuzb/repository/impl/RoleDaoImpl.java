@@ -51,5 +51,37 @@ public class RoleDaoImpl  extends BaseDaoImpl<Role>  implements RoleDao {
         List<Role> roleList = query.list();
         return roleList;
     }
+    
+    @Override
+    public List<Role> getRoleList(Role role) {
+        StringBuffer hql = new StringBuffer("from Role where 1=1 ");
+        if(role.getRole()!=null&&!"".equals(role.getRole())){
+            hql.append(" AND role like '%"+role.getRole()+"%'");
+        }
+        if(role.getStartTime()!=null&&!"".equals(role.getStartTime())){
+            hql.append(" AND create_Time <= DATE_FORMAT('"+role.getStartTime()+"','%Y-%d-%m %H:%i:%s')");
+        }
+        if(role.getEndTime()!=null&&!"".equals(role.getEndTime())){
+            hql.append(" AND create_Time >= DATE_FORMAT('"+role.getEndTime()+"','%Y-%d-%m %H:%i:%s')");
+        }
+        Query query = super.getSession().createQuery(hql.toString());
+        query.setFirstResult(role.getPageSize()*(role.getPageNumber()-1));
+        query.setMaxResults(role.getPageSize());
+        List<Role> list = query.list();
+        return list;
+    }
+    
+    @Override
+    public Role findByRoleName(String roleName) {
+        String hql = "select r from Role r where r.role = ? ";
+        Query query = super.getSession().createQuery(hql).setString(0,roleName);
+        List<Role> roleList = query.list();
+        if(roleList!=null&&roleList.size() > 0) {
+            Role r = roleList.get(0);
+            //System.out.println(u);
+            return r;
+        }
+        return null;
+    }
 
 }

@@ -1,8 +1,17 @@
 package com.zhuzb.web.controller;
 
+import com.zhuzb.common.TreeViewEntity;
 import com.zhuzb.entity.Role;
+import com.zhuzb.entity.User;
 import com.zhuzb.service.ResourceService;
 import com.zhuzb.service.RoleService;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -31,7 +41,7 @@ public class RoleController {
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("roleList", roleService.findAll());
-        return "role/list";
+        return "role/roleList";
     }
 
     @RequiresPermissions("role:create")
@@ -88,6 +98,37 @@ public class RoleController {
 
     private void setCommonData(Model model) {
         model.addAttribute("resourceList", resourceService.findAll());
+    }
+    
+    @RequestMapping("/treeViewEnriry")
+    @ResponseBody
+    public List<TreeViewEntity> treeViewEnriry(){
+     	List<TreeViewEntity> lists = resourceService.getTreeViewList();
+    	return lists;
+    }
+    
+    @RequiresPermissions("user:view")
+    @RequestMapping(value = "/getRoleList", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object>getUserList(HttpServletRequest request,Role role) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Role> list = roleService.getRoleList(role);
+        map.put("total", roleService.findAll().size());
+        map.put("rows", list);
+        return map;
+    }
+    
+    @RequestMapping("/checkRoleName")
+    @ResponseBody
+    public boolean checkUserName(HttpServletRequest request){
+        String rolename = request.getParameter("rolename");
+        if(rolename!=null&&!"".equals(rolename)){
+            Role role = roleService.findByRoleName(rolename);
+            if(role!=null){
+                return false;
+            }
+        }
+        return true;
     }
 
 }

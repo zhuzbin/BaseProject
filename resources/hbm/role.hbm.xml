@@ -10,5 +10,7 @@
         <property name="description" column="description"></property>
         <property name="resourceIds" column="resource_ids"></property>
         <property name="available" column="available"></property>
+        <property name="createTime" column="create_time"></property>
+        <property name="updateTime" column="update_time"></property>
     </class>
 </hibernate-mapping>

@@ -53,6 +53,12 @@ public class Functions {
         return jsonArray;
     }
     
+    public static JSONArray resourcesAll(){
+    	List<Resource> listAll = resourceService3.findAll();
+    	JSONArray jsonArray = JSONArray.fromObject(listAll);
+    	return jsonArray;
+    }
+    
     public static String roleName(Long roleId) {
         Role role = roleService2.findOne(roleId);
         if(role == null) {

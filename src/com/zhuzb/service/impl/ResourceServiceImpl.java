@@ -1,5 +1,7 @@
 package com.zhuzb.service.impl;
 
+import com.zhuzb.common.TreeViewEntity;
+import com.zhuzb.common.TreeViewState;
 import com.zhuzb.entity.Resource;
 import com.zhuzb.repository.ResourceDao;
 import com.zhuzb.service.ResourceService;
@@ -112,4 +114,50 @@ public class ResourceServiceImpl implements ResourceService {
         }
         return false;
     }
+
+	@Override
+	public List<TreeViewEntity> getTreeViewList() {
+		//获取所有的资源
+		List<Resource> resourceAll = findAll();
+		List<TreeViewEntity> treeView = new ArrayList<TreeViewEntity>();
+		for(Resource resource : resourceAll){
+			TreeViewEntity entity = new TreeViewEntity();
+			entity.setNodeid(resource.getId().intValue());
+			entity.setText(resource.getName());
+			entity.setSelectable(false);
+			entity.setState(getState());
+			entity.setParentId(0);
+			if(resource.getParentId().equals(1)){//父节点为0
+				treeView.add(addChild(entity, resourceAll));
+			}
+		}
+		return null;
+	}
+	
+	public TreeViewEntity addChild(TreeViewEntity entity,List<Resource> list){
+		List<TreeViewEntity> lists = new ArrayList<TreeViewEntity>();
+		for(Resource resource : list){
+			if(resource.getParentId().equals(entity.getNodeid())){
+				TreeViewEntity newEntity = new TreeViewEntity();
+				newEntity.setText(resource.getName());
+				newEntity.setNodeid(Integer.valueOf(resource.getId().toString()));
+				newEntity.setParentId(entity.getNodeid());
+				newEntity.setState(getState());
+				newEntity.setSelectable(false);
+				lists.add(newEntity);
+			}
+		}
+		entity.setNodes(lists);
+		return entity;
+	}
+	
+	public TreeViewState getState(){
+		TreeViewState state = new TreeViewState();
+		state.setChecked(false);
+		state.setDisabled(false);
+		state.setExpanded(false);
+		state.setSelected(false);
+		return state;
+	}
+
 }

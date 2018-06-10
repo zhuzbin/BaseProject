@@ -33,4 +33,13 @@ public interface RoleService {
      * @return
      */
     Set<String> findPermissions(Long[] roleIds);
+    
+    /**
+     * 查询角色列表
+     * @param role
+     * @return
+     */
+    public List<Role> getRoleList(Role role);
+    
+    public Role findByRoleName(String roleName);
 }

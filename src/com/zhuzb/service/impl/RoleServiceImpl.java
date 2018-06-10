@@ -21,7 +21,7 @@ import java.util.Set;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
+	@Autowired
     private RoleDao roleDao;
     @Autowired
     private ResourceService resourceService;
@@ -75,4 +75,16 @@ public class RoleServiceImpl implements RoleService {
         }
         return resourceService.findPermissions(resourceIds);
     }
+
+	@Override
+	public List<Role> getRoleList(Role role) {
+		return roleDao.getRoleList(role);
+	}
+	
+    @Override
+	public Role findByRoleName(String roleName) {
+    	return roleDao.findByRoleName(roleName);
+	}
+    
+    
 }
